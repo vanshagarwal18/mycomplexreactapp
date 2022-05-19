@@ -1,10 +1,19 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const sanitizeHTML = require("sanitize-html");
 const jwt = require("jsonwebtoken");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//access-control-allow-credentials:true
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use("/", require("./router"));
 
